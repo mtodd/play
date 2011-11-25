@@ -1,4 +1,10 @@
-<div class="song {{#now_playing?}}now-playing{{/now_playing?}}">
+<div class="song">
+  {{^queued?}}
+    {{^now_playing?}}
+      <span class="play"><a href="/add/{{id}}" title="add to queue" class="add">&nbsp;►&nbsp;</a></span>
+    {{/now_playing?}}
+  {{/queued?}}
+
   <div class="artist">
     <a href="/artist/{{artist_name}}">{{artist_name}}</a>
   </div>
