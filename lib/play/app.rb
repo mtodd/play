@@ -49,7 +49,9 @@ module Play
     end
 
     get "/" do
-      @recent   = History.limit(5).order('created_at').collect(&:song)
+      @recent   = History.limit(5+1). # The history will include current_song
+                  order('created_at desc')[1..-1]. # remove current_song
+                  collect(&:song).reverse
       @current  = current_song
       @songs    = Song.queue.includes(:album, :artist, :votes).all
       mustache :index
